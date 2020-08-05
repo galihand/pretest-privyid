@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, User_balances } = require('../models')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
@@ -6,6 +6,10 @@ module.exports = {
   register: async (req, res) => {
     try {
       const user = await User.create(req.body)
+      await User_balances.create({
+        user_id: user.id,
+        balance: 0
+      })
       const data = {
         username: user.username,
         email: user.email

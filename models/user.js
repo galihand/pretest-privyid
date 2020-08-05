@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasOne(models.User_balances, {
+        foreignKey: 'user_id'
+      })
     }
   };
   User.init({
@@ -46,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   User.beforeFind(instance => {
-    if(instance.where.email) {
+    if (instance.where.email) {
       instance.where.email = instance.where.email.toLowerCase()
     }
   })
