@@ -48,12 +48,27 @@ module.exports = {
       data.token = token
 
       res.status(202).json({
-        status:'success',
+        status: 'success',
         data
       })
     } catch (err) {
       res.status(401).json({
-        status:'fail',
+        status: 'fail',
+        message: err.message
+      })
+    }
+  },
+
+  show: async (req, res) => {
+    try {
+      console.log(req.user)
+      res.status(200).json({
+        status: 'success',
+        data: req.user
+      })
+    } catch (err) {
+      res.status(500).json({
+        status: 'fail',
         message: err.message
       })
     }
