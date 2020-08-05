@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       User_balances.belongsTo(models.User, {
         foreignKey: 'user_id'
       })
+
+      User_balances.hasMany(models.User_balance_histories, {
+        foreignKey: 'user_balance_id'
+      })
     }
   };
   User_balances.init({
@@ -26,13 +30,22 @@ module.exports = (sequelize, DataTypes) => {
 
   User_balances.topup = async (data) => {
     const { user_id, ammount } = data
-    if(!Number.isInteger(ammount)) return Promise.reject(new Error('Ammount must be number'))
+    if (!Number.isInteger(ammount)) return Promise.reject(new Error('Ammount must be number'))
     const pastBalance = await User_balances.findOne({ where: { user_id } })
     const coba = await User_balances.increment('balance', {
       by: ammount,
       where: { user_id }
     })
     const balance = await User_balances.findOne({ where: { user_id } })
+
+    await sequelize.models.User_balance_histories.create({
+      user_balance_id: balance.id,
+      balance_before: pastBalance.balance,
+      balance_after: balance.balance,
+      activity: 'Topup Balance',
+      type: 'debit'
+    })
+
     return balance
   }
 
