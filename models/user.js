@@ -45,5 +45,11 @@ module.exports = (sequelize, DataTypes) => {
     instance.password = bcrypt.hashSync(instance.password, 10)
   })
 
+  User.beforeFind(instance => {
+    if(instance.where.email) {
+      instance.where.email = instance.where.email.toLowerCase()
+    }
+  })
+
   return User;
 };

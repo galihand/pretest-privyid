@@ -2,12 +2,7 @@ const router = require('express').Router()
 const user = require('../controllers/user')
 
 router.post('/', user.register)
-router.post('/auth', (req, res) => {
-  res.status(201).json({
-    status: 'success',
-    message: 'API Login user'
-  })
-})
+router.post('/auth', user.auth)
 router.get('/', (req, res) => {
   res.status(201).json({
     status: 'success',
