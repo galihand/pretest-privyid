@@ -1,0 +1,7 @@
+PORT= Your port number to run this app
+
+DB_USERNAME= Your databse username
+DB_PASSWORD= Your database password
+DB_DATABASE= Your database name
+
+SECRET_KEY= Your secret key to generate and validate token
