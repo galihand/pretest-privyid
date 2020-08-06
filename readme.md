@@ -26,7 +26,7 @@ This is server-side application based on Node.js to finish Pretest at Privyid to
 6. Run ```npm install``` to install all dependecies
 7. Run ```sequelize db:create``` to create database
 8. Run ```sequelize db:migrate``` to execute migration file and generate table into our database
-9. Run ```sequelize db:seed:all`` to execute seeder file and generate demo user
+9. Run ```sequelize db:seed:all``` to execute seeder file and generate demo user
 10. Last but not least you can run this server-side using ```nmp start``` or ```npm run dev```
 
 ## Explanation
